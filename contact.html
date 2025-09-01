@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Life Cunningham</title>
+  <meta name="description"
+    content="Get in touch with Life Cunningham. Send messages, media inquiries, or join the newsletter for updates.">
+  <meta name="keywords" content="contact Life Cunningham, author contact, media inquiries, book events">
+  <meta name="author" content="Life Cunningham">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lifecunningham.com/contact">
+  <meta property="og:title" content="Contact - Life Cunningham">
+  <meta property="og:description"
+    content="Get in touch with Life Cunningham. Send messages, media inquiries, or join the newsletter.">
+  <meta property="og:image" content="https://lifecunningham.com/images/contact-hero.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lifecunningham.com/contact">
+  <meta property="twitter:title" content="Contact - Life Cunningham">
+  <meta property="twitter:description"
+    content="Get in touch with Life Cunningham. Send messages, media inquiries, or join the newsletter.">
+  <meta property="twitter:image" content="https://lifecunningham.com/images/contact-hero.jpg">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html">Life Cunningham</a>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About</a>
+        </li>
+        <li class="nav-item">
+          <a href="books.html" class="nav-link">Books</a>
+        </li>
+        <li class="nav-item">
+          <a href="blog.html" class="nav-link">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a href="fan-zone.html" class="nav-link">Fan Zone</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contact</a>
+        </li>
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Get in Touch</h1>
+        <p class="hero-subtitle">I'd love to hear from you</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Options -->
+  <section class="contact-options">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3>General Inquiries</h3>
+          <p>Have a question about my books or just want to say hello? I'd love to hear from you!</p>
+          <a href="mailto:hello@lifecunningham.com" class="btn btn-primary">Send Email</a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-microphone"></i>
+          </div>
+          <h3>Media & Press</h3>
+          <p>Journalists, bloggers, and media professionals can reach out for interviews, reviews, and press materials.
+          </p>
+          <a href="mailto:press@lifecunningham.com" class="btn btn-secondary">Media Contact</a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h3>Events & Appearances</h3>
+          <p>Interested in having me speak at your event, book club, or school? Let's discuss the possibilities.</p>
+          <a href="mailto:events@lifecunningham.com" class="btn btn-outline">Event Inquiries</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-form-section">
+    <div class="container">
+      <div class="form-container">
+        <div class="form-header">
+          <h2>Send Me a Message</h2>
+          <p>Fill out the form below and I'll get back to you as soon as possible.</p>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option value="general">General Inquiry</option>
+              <option value="book-question">Book Question</option>
+              <option value="media">Media/Press</option>
+              <option value="event">Event/Appearance</option>
+              <option value="fan-art">Fan Art/Content</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="6" required
+              placeholder="Tell me what's on your mind..."></textarea>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="newsletter" name="newsletter">
+              <span class="checkmark"></span>
+              I'd like to receive updates about new releases and exclusive content
+            </label>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media -->
+  <section class="social-contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Connect With Me</h2>
+        <p>Follow my journey on social media for behind-the-scenes content and updates</p>
+      </div>
+
+      <div class="social-grid">
+        <div class="social-card">
+          <div class="social-icon">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <h3>Instagram</h3>
+          <p>Behind-the-scenes glimpses, writing updates, and magical moments from my daily life.</p>
+          <a href="https://instagram.com/lifecunningham" target="_blank" class="btn btn-outline">Follow
+            @lifecunningham</a>
+        </div>
+
+        <div class="social-card">
+          <div class="social-icon">
+            <i class="fab fa-twitter"></i>
+          </div>
+          <h3>Twitter</h3>
+          <p>Quick updates, writing tips, book recommendations, and conversations with fellow readers.</p>
+          <a href="https://twitter.com/lifecunningham" target="_blank" class="btn btn-outline">Follow
+            @lifecunningham</a>
+        </div>
+
+        <div class="social-card">
+          <div class="social-icon">
+            <i class="fab fa-tiktok"></i>
+          </div>
+          <h3>TikTok</h3>
+          <p>Short videos about writing life, book recommendations, and fun content for book lovers.</p>
+          <a href="https://tiktok.com/@lifecunningham" target="_blank" class="btn btn-outline">Follow
+            @lifecunningham</a>
+        </div>
+
+        <div class="social-card">
+          <div class="social-icon">
+            <i class="fab fa-goodreads"></i>
+          </div>
+          <h3>Goodreads</h3>
+          <p>See what I'm reading, my book reviews, and join discussions about books we love.</p>
+          <a href="https://goodreads.com/lifecunningham" target="_blank" class="btn btn-outline">Follow on Goodreads</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick answers to common questions</p>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>When will the next book be released?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>I'm currently working on Spirit Caster #2 and aiming for a 2024 release. Join my newsletter to be the
+              first to know when pre-orders are available!</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Do you accept fan art or fan fiction?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>I absolutely love seeing fan art and creative content inspired by my books! Feel free to tag me on social
+              media or send it via email. I try to share as much as I can!</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Can I request a signed book?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>I offer signed books through select independent bookstores. Check my social media for announcements about
+              signing events and availability.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Will there be more books in the Spirit Caster series?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>The Spirit Caster series is planned as a trilogy, but I have many more stories to tell! I'm already
+              brainstorming ideas for future series and standalone novels.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Do you do school visits or book club appearances?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! I love connecting with readers through virtual and in-person events. Send me an email with details
+              about your event, and I'll do my best to make it work.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How can I support your work?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>The best ways to support me are: buy my books (especially from independent bookstores), leave reviews,
+              share my work on social media, and join my newsletter. Every little bit helps!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2>Stay Connected</h2>
+        <p>Join my newsletter for exclusive updates, behind-the-scenes content, and early access to new releases.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </div>
+          <p class="form-note">I respect your privacy. Unsubscribe at any time.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Life Cunningham</h3>
+          <p>Fantasy author crafting magical worlds and unforgettable characters.</p>
+          <div class="social-links">
+            <a href="https://instagram.com/lifecunningham" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/lifecunningham" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://tiktok.com/@lifecunningham" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://goodreads.com/lifecunningham" target="_blank"><i class="fab fa-goodreads"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="fan-zone.html">Fan Zone</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Books</h4>
+          <ul>
+            <li><a href="books.html#winters-war">Winters' War</a></li>
+            <li><a href="books.html#spirit-caster">Spirit Caster Series</a></li>
+            <li><a href="fan-zone.html">Bonus Content</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Newsletter</h4>
+          <p>Get updates on new releases and exclusive content.</p>
+          <form class="footer-newsletter">
+            <input type="email" placeholder="Your email" required>
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Life Cunningham. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
