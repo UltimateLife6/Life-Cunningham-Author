@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "life-cunningham-author",
   "builds": [
     {
       "src": "*.html",
@@ -19,30 +18,26 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/about",
+      "destination": "/about.html"
     },
     {
-      "src": "/about",
-      "dest": "/about.html"
+      "source": "/books",
+      "destination": "/books.html"
     },
     {
-      "src": "/books",
-      "dest": "/books.html"
+      "source": "/blog",
+      "destination": "/blog.html"
     },
     {
-      "src": "/blog",
-      "dest": "/blog.html"
+      "source": "/contact",
+      "destination": "/contact.html"
     },
     {
-      "src": "/contact",
-      "dest": "/contact.html"
-    },
-    {
-      "src": "/fan-zone",
-      "dest": "/fan-zone.html"
+      "source": "/fan-zone",
+      "destination": "/fan-zone.html"
     }
   ],
   "headers": [
