@@ -29,7 +29,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Newsletter Form Handling with EmailOctopus
 const newsletterForm = document.getElementById('newsletterForm');
-const popupForm = document.querySelector('.popup-form');
 const footerNewsletterForms = document.querySelectorAll('.footer-newsletter-form');
 
 // Wait for EmailOctopus script to load
@@ -50,26 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Popup form
-    if (popupForm) {
-      emailoctopus.setupForm(popupForm, {
-        onSuccess: function() {
-          showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
-          popupForm.reset();
-          
-          // Close popup
-          const popup = document.getElementById('newsletterPopup');
-          if (popup && popup.style.display === 'flex') {
-            popup.style.display = 'none';
-          }
-          
-          trackNewsletterSubscription('popup');
-        },
-        onError: function() {
-          showNotification('Sorry, there was an error subscribing. Please try again.', 'error');
-        }
-      });
-    }
 
     // Footer newsletter forms
     footerNewsletterForms.forEach((form, index) => {
@@ -95,45 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Newsletter Popup
-const newsletterPopup = document.getElementById('newsletterPopup');
-const popupClose = document.getElementById('popupClose');
-
-// Show popup after 30 seconds or when user tries to leave
-let popupShown = false;
-
-function showNewsletterPopup() {
-  if (!popupShown && newsletterPopup) {
-    newsletterPopup.style.display = 'flex';
-    popupShown = true;
-  }
-}
-
-// Show popup on exit intent
-document.addEventListener('mouseleave', (e) => {
-  if (e.clientY <= 0 && !popupShown) {
-    setTimeout(showNewsletterPopup, 1000);
-  }
-});
-
-// Show popup after 30 seconds
-setTimeout(showNewsletterPopup, 30000);
-
-// Close popup
-if (popupClose) {
-  popupClose.addEventListener('click', () => {
-    newsletterPopup.style.display = 'none';
-  });
-}
-
-// Close popup when clicking outside
-if (newsletterPopup) {
-  newsletterPopup.addEventListener('click', (e) => {
-    if (e.target === newsletterPopup) {
-      newsletterPopup.style.display = 'none';
-    }
-  });
-}
+// Newsletter popup functionality removed - using main and footer forms only
 
 // Notification System
 function showNotification(message, type = 'info') {
@@ -296,10 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Keyboard navigation support
 document.addEventListener('keydown', (e) => {
-  // Close popup with Escape key
-  if (e.key === 'Escape' && newsletterPopup && newsletterPopup.style.display === 'flex') {
-    newsletterPopup.style.display = 'none';
-  }
+  // Popup functionality removed
 
   // Close mobile menu with Escape key
   if (e.key === 'Escape' && navMenu.classList.contains('active')) {
