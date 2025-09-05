@@ -27,54 +27,58 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Newsletter Form Handling
+// Newsletter Form Handling with EmailOctopus
 const newsletterForm = document.getElementById('newsletterForm');
 const popupForm = document.querySelector('.popup-form');
 
-function handleNewsletterSubmit(form, event) {
-  const email = form.querySelector('input[type="email"]').value;
-
-  // Validate email before submitting
-  if (!validateEmail(email)) {
-    event.preventDefault();
-    showNotification('Please enter a valid email address.', 'error');
-    return;
-  }
-
-  // Show loading state
-  const submitBtn = form.querySelector('button[type="submit"]');
-  const originalText = submitBtn.textContent;
-  submitBtn.textContent = 'Subscribing...';
-  submitBtn.disabled = true;
-
-  // Track subscription attempt
-  trackNewsletterSubscription('form');
-
-  // Let the form submit naturally to EmailOctopus
-  // We'll show a success message after a delay
-  setTimeout(() => {
-    showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
-    form.reset();
-    
-    // Close popup if it's open
-    const popup = document.getElementById('newsletterPopup');
-    if (popup && popup.style.display === 'flex') {
-      popup.style.display = 'none';
+// Wait for EmailOctopus script to load
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize EmailOctopus forms
+  if (typeof emailoctopus !== 'undefined') {
+    // Newsletter form
+    if (newsletterForm) {
+      emailoctopus.setupForm(newsletterForm, {
+        onSuccess: function() {
+          showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
+          newsletterForm.reset();
+          trackNewsletterSubscription('form');
+        },
+        onError: function() {
+          showNotification('Sorry, there was an error subscribing. Please try again.', 'error');
+        }
+      });
     }
-    
-    // Reset button state
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
-  }, 2000);
-}
 
-if (newsletterForm) {
-  newsletterForm.addEventListener('submit', (e) => handleNewsletterSubmit(newsletterForm, e));
-}
-
-if (popupForm) {
-  popupForm.addEventListener('submit', (e) => handleNewsletterSubmit(popupForm, e));
-}
+    // Popup form
+    if (popupForm) {
+      emailoctopus.setupForm(popupForm, {
+        onSuccess: function() {
+          showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
+          popupForm.reset();
+          
+          // Close popup
+          const popup = document.getElementById('newsletterPopup');
+          if (popup && popup.style.display === 'flex') {
+            popup.style.display = 'none';
+          }
+          
+          trackNewsletterSubscription('popup');
+        },
+        onError: function() {
+          showNotification('Sorry, there was an error subscribing. Please try again.', 'error');
+        }
+      });
+    }
+  } else {
+    // Fallback if EmailOctopus script hasn't loaded yet
+    setTimeout(() => {
+      if (typeof emailoctopus !== 'undefined') {
+        // Retry initialization
+        location.reload();
+      }
+    }, 2000);
+  }
+});
 
 // Newsletter Popup
 const newsletterPopup = document.getElementById('newsletterPopup');
