@@ -35,18 +35,50 @@ function handleNewsletterSubmit(form, event) {
   event.preventDefault();
   const email = form.querySelector('input[type="email"]').value;
 
-  // Here you would typically send to your newsletter service
-  // For now, we'll simulate a successful subscription
-  showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
-
-  // Clear the form
-  form.reset();
-
-  // Close popup if it's open
-  const popup = document.getElementById('newsletterPopup');
-  if (popup.style.display === 'flex') {
-    popup.style.display = 'none';
+  // Validate email before submitting
+  if (!validateEmail(email)) {
+    showNotification('Please enter a valid email address.', 'error');
+    return;
   }
+
+  // Show loading state
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Subscribing...';
+  submitBtn.disabled = true;
+
+  // Submit to EmailOctopus
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
+      form.reset();
+      
+      // Close popup if it's open
+      const popup = document.getElementById('newsletterPopup');
+      if (popup && popup.style.display === 'flex') {
+        popup.style.display = 'none';
+      }
+      
+      // Track subscription
+      trackNewsletterSubscription('form');
+    } else {
+      throw new Error(data.message || 'Subscription failed');
+    }
+  })
+  .catch(error => {
+    console.error('Newsletter subscription error:', error);
+    showNotification('Sorry, there was an error subscribing. Please try again.', 'error');
+  })
+  .finally(() => {
+    // Reset button state
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  });
 }
 
 if (newsletterForm) {
