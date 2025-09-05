@@ -35,7 +35,7 @@ const footerNewsletterForms = document.querySelectorAll('.footer-newsletter-form
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize EmailOctopus forms
   if (typeof emailoctopus !== 'undefined') {
-    // Main newsletter form
+    // Main newsletter form (index page - new form ID)
     if (newsletterForm) {
       emailoctopus.setupForm(newsletterForm, {
         onSuccess: function() {
