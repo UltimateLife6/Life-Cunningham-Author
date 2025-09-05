@@ -28,38 +28,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Newsletter Form Handling with EmailOctopus
-const footerNewsletterForms = document.querySelectorAll('.footer-newsletter-form');
-
-// Wait for EmailOctopus script to load
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize EmailOctopus forms
-  if (typeof emailoctopus !== 'undefined') {
-    // Main newsletter form is now handled by the embedded script in the HTML
-    // Only need to handle footer forms
-
-    // Footer newsletter forms
-    footerNewsletterForms.forEach((form, index) => {
-      emailoctopus.setupForm(form, {
-        onSuccess: function() {
-          showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
-          form.reset();
-          trackNewsletterSubscription('footer');
-        },
-        onError: function() {
-          showNotification('Sorry, there was an error subscribing. Please try again.', 'error');
-        }
-      });
-    });
-  } else {
-    // Fallback if EmailOctopus script hasn't loaded yet
-    setTimeout(() => {
-      if (typeof emailoctopus !== 'undefined') {
-        // Retry initialization
-        location.reload();
-      }
-    }, 2000);
-  }
-});
+// All newsletter forms are now handled by embedded EmailOctopus scripts
+// No custom JavaScript handling needed
 
 // Newsletter popup functionality removed - using main and footer forms only
 
