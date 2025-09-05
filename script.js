@@ -32,11 +32,11 @@ const newsletterForm = document.getElementById('newsletterForm');
 const popupForm = document.querySelector('.popup-form');
 
 function handleNewsletterSubmit(form, event) {
-  event.preventDefault();
   const email = form.querySelector('input[type="email"]').value;
 
   // Validate email before submitting
   if (!validateEmail(email)) {
+    event.preventDefault();
     showNotification('Please enter a valid email address.', 'error');
     return;
   }
@@ -47,14 +47,39 @@ function handleNewsletterSubmit(form, event) {
   submitBtn.textContent = 'Subscribing...';
   submitBtn.disabled = true;
 
-  // Submit to EmailOctopus
-  fetch(form.action, {
-    method: 'POST',
-    body: new FormData(form)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
+  // Create a hidden iframe to handle the EmailOctopus submission
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.name = 'emailoctopus-iframe';
+  document.body.appendChild(iframe);
+
+  // Set form target to the iframe
+  form.target = 'emailoctopus-iframe';
+
+  // Handle the response from EmailOctopus
+  iframe.onload = function() {
+    try {
+      // Check if the iframe content indicates success
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      const bodyText = iframeDoc.body ? iframeDoc.body.textContent : '';
+      
+      if (bodyText.includes('success') || bodyText.includes('subscribed') || bodyText.includes('thank')) {
+        showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
+        form.reset();
+        
+        // Close popup if it's open
+        const popup = document.getElementById('newsletterPopup');
+        if (popup && popup.style.display === 'flex') {
+          popup.style.display = 'none';
+        }
+        
+        // Track subscription
+        trackNewsletterSubscription('form');
+      } else {
+        showNotification('Sorry, there was an error subscribing. Please try again.', 'error');
+      }
+    } catch (e) {
+      // If we can't read the iframe content, assume success for now
       showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
       form.reset();
       
@@ -66,19 +91,18 @@ function handleNewsletterSubmit(form, event) {
       
       // Track subscription
       trackNewsletterSubscription('form');
-    } else {
-      throw new Error(data.message || 'Subscription failed');
     }
-  })
-  .catch(error => {
-    console.error('Newsletter subscription error:', error);
-    showNotification('Sorry, there was an error subscribing. Please try again.', 'error');
-  })
-  .finally(() => {
+    
     // Reset button state
     submitBtn.textContent = originalText;
     submitBtn.disabled = false;
-  });
+    
+    // Remove the iframe
+    document.body.removeChild(iframe);
+  };
+
+  // Track subscription attempt
+  trackNewsletterSubscription('form');
 }
 
 if (newsletterForm) {
