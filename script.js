@@ -466,4 +466,102 @@ if ('serviceWorker' in navigator) {
         console.log('SW registration failed: ', registrationError);
       });
   });
+}
+
+// Read Sample functionality
+function showSample() {
+  // Create modal overlay
+  const modal = document.createElement('div');
+  modal.className = 'sample-modal-overlay';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  `;
+
+  // Create modal content
+  const modalContent = document.createElement('div');
+  modalContent.className = 'sample-modal-content';
+  modalContent.style.cssText = `
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  `;
+
+  // Sample content
+  modalContent.innerHTML = `
+    <button class="sample-close" style="
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    ">&times;</button>
+    
+    <h2 style="color: #2c3e50; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Winters' War - Sample Chapter</h2>
+    
+    <div style="line-height: 1.8; color: #333; font-family: 'Lato', sans-serif;">
+      <p><strong>Chapter 1: The Last Night</strong></p>
+      
+      <p>The first time Crystal saw the magic, she was seven years old and hiding in the hollow of an ancient oak tree. The village elders had gathered in the clearing below, their hands raised to the sky as they chanted words that made the air itself shimmer with power.</p>
+      
+      <p>But Crystal saw something different. Where others saw only light and shadow, she saw the threads of magic weaving through the air like invisible silk, connecting everything—the trees, the stones, the very breath of the world. It was beautiful and terrifying, and she knew instinctively that she should never speak of it.</p>
+      
+      <p>Now, ten years later, those same threads were calling to her, and this time, she couldn't ignore them.</p>
+      
+      <p>The attack came at dawn, when the village was still wrapped in the soft embrace of sleep. Crystal woke to the sound of screams and the acrid smell of smoke. She bolted from her bed, her heart hammering against her ribs as she raced to the window.</p>
+      
+      <p>Flames licked at the thatched roofs of the houses below, painting the sky in shades of orange and red. Figures in dark cloaks moved through the chaos, their swords glinting in the firelight. The Royals had come.</p>
+      
+      <p>"Crystal!" Her mother's voice cut through the noise, sharp with urgency. "We have to go. Now!"</p>
+      
+      <p>But it was too late. The door burst open with a crash, and three figures in black armor filled the doorway. Crystal's father stepped forward, his hands raised in a gesture of peace, but the lead soldier didn't hesitate. His blade found its mark with a sickening thud.</p>
+      
+      <p>Crystal's world shattered in that moment. The threads of magic that had always been so beautiful now writhed and twisted with her pain, responding to the raw emotion that threatened to consume her. She felt something awaken deep inside her chest—a power she had never known she possessed.</p>
+      
+      <p>As her mother fell beside her father, Crystal made a promise to herself that would change everything: <em>"From this day forward, I'm not fighting for revenge. I'm fighting to protect the people I love."</em></p>
+      
+      <p style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-left: 4px solid #3498db; font-style: italic;">
+        <strong>Want to read more?</strong> Get your copy of Winters' War on Amazon or Barnes & Noble to continue Crystal's journey of revenge, redemption, and the power of the Shēna.
+      </p>
+    </div>
+  `;
+
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+
+  // Close modal functionality
+  const closeModal = () => {
+    document.body.removeChild(modal);
+  };
+
+  modal.querySelector('.sample-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Close on Escape key
+  const handleEscape = (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+      document.removeEventListener('keydown', handleEscape);
+    }
+  };
+  document.addEventListener('keydown', handleEscape);
 } 
