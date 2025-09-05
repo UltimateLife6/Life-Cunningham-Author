@@ -616,7 +616,40 @@ p {
   transform: translateY(-2px);
 }
 
-/* Footer newsletter styles removed - now using main newsletter forms */
+/* Footer Newsletter Form */
+.footer-newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.footer-newsletter-form input {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.footer-newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-newsletter-form button {
+  padding: 8px 12px;
+  background: var(--accent-green);
+  border: none;
+  border-radius: 4px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.footer-newsletter-form button:hover {
+  background: #3a6b4a;
+}
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
