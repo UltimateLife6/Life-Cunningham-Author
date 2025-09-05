@@ -1,15 +1,11 @@
 // EmailOctopus Configuration
-// Replace YOUR_LIST_ID with your actual EmailOctopus list ID
-// You can find this in your EmailOctopus dashboard under Lists > [Your List] > Settings > Forms
+// You need to get the actual embedded form code from your EmailOctopus dashboard
+// Go to Lists > [Your List] > Settings > Forms > Embedded Forms
 
 const EMAILOCTOPUS_CONFIG = {
-  // Replace 'YOUR_LIST_ID' with your actual list ID from EmailOctopus
-  LIST_ID: 'e9516f04-89ee-11f0-a241-43698dd08940',
-  
-  // The base URL for EmailOctopus embedded forms
-  get ACTION_URL() {
-    return `https://emailoctopus.com/lists/${this.LIST_ID}/members/embedded/1.1/add`;
-  },
+  // This should be the actual form action URL from EmailOctopus
+  // Get this from: Lists > [Your List] > Settings > Forms > Embedded Forms
+  ACTION_URL: 'https://emailoctopus.com/lists/e9516f04-89ee-11f0-a241-43698dd08940/members/embedded/1.1/add',
   
   // Optional: Add any additional fields you want to collect
   ADDITIONAL_FIELDS: {

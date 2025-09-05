@@ -47,62 +47,25 @@ function handleNewsletterSubmit(form, event) {
   submitBtn.textContent = 'Subscribing...';
   submitBtn.disabled = true;
 
-  // Create a hidden iframe to handle the EmailOctopus submission
-  const iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.name = 'emailoctopus-iframe';
-  document.body.appendChild(iframe);
+  // Track subscription attempt
+  trackNewsletterSubscription('form');
 
-  // Set form target to the iframe
-  form.target = 'emailoctopus-iframe';
-
-  // Handle the response from EmailOctopus
-  iframe.onload = function() {
-    try {
-      // Check if the iframe content indicates success
-      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-      const bodyText = iframeDoc.body ? iframeDoc.body.textContent : '';
-      
-      if (bodyText.includes('success') || bodyText.includes('subscribed') || bodyText.includes('thank')) {
-        showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
-        form.reset();
-        
-        // Close popup if it's open
-        const popup = document.getElementById('newsletterPopup');
-        if (popup && popup.style.display === 'flex') {
-          popup.style.display = 'none';
-        }
-        
-        // Track subscription
-        trackNewsletterSubscription('form');
-      } else {
-        showNotification('Sorry, there was an error subscribing. Please try again.', 'error');
-      }
-    } catch (e) {
-      // If we can't read the iframe content, assume success for now
-      showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
-      form.reset();
-      
-      // Close popup if it's open
-      const popup = document.getElementById('newsletterPopup');
-      if (popup && popup.style.display === 'flex') {
-        popup.style.display = 'none';
-      }
-      
-      // Track subscription
-      trackNewsletterSubscription('form');
+  // Let the form submit naturally to EmailOctopus
+  // We'll show a success message after a delay
+  setTimeout(() => {
+    showNotification('Thank you for subscribing! Welcome to the adventure.', 'success');
+    form.reset();
+    
+    // Close popup if it's open
+    const popup = document.getElementById('newsletterPopup');
+    if (popup && popup.style.display === 'flex') {
+      popup.style.display = 'none';
     }
     
     // Reset button state
     submitBtn.textContent = originalText;
     submitBtn.disabled = false;
-    
-    // Remove the iframe
-    document.body.removeChild(iframe);
-  };
-
-  // Track subscription attempt
-  trackNewsletterSubscription('form');
+  }, 2000);
 }
 
 if (newsletterForm) {
