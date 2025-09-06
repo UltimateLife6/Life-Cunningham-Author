@@ -265,24 +265,77 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Contact Form Handling
+// EmailJS is now initialized in the HTML head to avoid conflicts
+
+// Contact Form Handling with EmailJS
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded, looking for contact form...');
   const contactForm = document.getElementById('contactForm');
+  console.log('Contact form found:', contactForm);
 
   if (contactForm) {
+    console.log('Adding submit event listener...');
     contactForm.addEventListener('submit', (e) => {
+      console.log('Form submitted!');
       e.preventDefault();
 
       // Get form data
       const formData = new FormData(contactForm);
       const data = Object.fromEntries(formData);
+      console.log('Form data:', data);
 
-      // Here you would typically send to your backend
-      // For now, we'll simulate a successful submission
-      showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+      // Show loading state
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
 
-      // Clear the form
-      contactForm.reset();
+      // Prepare email template parameters to match your template
+      // Combine all 6 form fields into the 3 template variables
+      const templateParams = {
+        name: `${data.firstName} ${data.lastName}`,
+        time: new Date().toLocaleString(),
+        message: `Email: ${data.email}
+Subject: ${data.subject}
+Newsletter Signup: ${data.newsletter ? 'Yes' : 'No'}
+
+Message:
+${data.message}`
+      };
+      
+      console.log('Form data received:', data);
+      console.log('Template params:', templateParams);
+
+      // Check if EmailJS is properly initialized
+      if (typeof emailjs === 'undefined') {
+        console.error('EmailJS not available');
+        showNotification('Email service not available. Please email me directly at lifecunninghamauthor@gmail.com', 'error');
+        return;
+      }
+      
+      // Send email using EmailJS with correct template ID
+      console.log('Sending email with correct template...');
+      console.log('EmailJS object:', emailjs);
+      
+      // Use the actual form data
+      console.log('Template params:', templateParams);
+      
+      // Send email using EmailJS
+      emailjs.send('service_5f2aor2', 'template_ftx2qi5', templateParams)
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+          showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+          contactForm.reset();
+        }, function(error) {
+          console.log('FAILED...', error);
+          console.log('Full error object:', JSON.stringify(error, null, 2));
+          showNotification(`Error: ${error.text || error.message || 'Check console for details'}`, 'error');
+        })
+        .finally(() => {
+          // Reset button state
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        });
     });
   }
 });

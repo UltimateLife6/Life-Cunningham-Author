@@ -33,6 +33,16 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS immediately when script loads
+    (function() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init("PpZ3pNTkg7MqhnIeM");
+        console.log('EmailJS initialized in head');
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -145,12 +155,12 @@
             <label for="subject">Subject *</label>
             <select id="subject" name="subject" required>
               <option value="">Select a subject</option>
-              <option value="general">General Inquiry</option>
-              <option value="book-question">Book Question</option>
-              <option value="media">Media/Press</option>
-              <option value="event">Event/Appearance</option>
-              <option value="fan-art">Fan Art/Content</option>
-              <option value="other">Other</option>
+              <option value="General Inquiry">General Inquiry</option>
+              <option value="Book Question">Book Question</option>
+              <option value="Media/Press">Media/Press</option>
+              <option value="Event/Appearance">Event/Appearance</option>
+              <option value="Fan Art/Content">Fan Art/Content</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
